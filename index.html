@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Varsana - Strategic Business Partner</title>
+    
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse-slow 6s ease-in-out infinite',
+                    },
+                    boxShadow: {
+                        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+                        '4xl': '0 45px 80px -20px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Keyframe Animations */
+        @keyframes reveal-bottom {
+            0% { transform: translateY(100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.1); }
+        }
+
+        .animate-reveal-bottom { animation: reveal-bottom 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-in { animation: fade-in 1.5s ease forwards; opacity: 0; }
+        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-slow 7s ease-in-out infinite 2s; }
+        .animate-pulse-slow { animation: pulse-slow 6s ease-in-out infinite; }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-900 { animation-delay: 0.9s; }
+
+        /* Reveal on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+        
+        /* Utility for Safari compatibility */
+        .backdrop-blur-3xl {
+            -webkit-backdrop-filter: blur(64px);
+            backdrop-filter: blur(64px);
+        }
+    </style>
+</head>
+<body class="bg-white text-[#0F172A] selection:bg-blue-600 selection:text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="fixed top-0 left-0 h-1 z-[70] bg-blue-600 transition-all duration-300" style="width: 0%"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-700 bg-transparent py-6">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            <div class="flex items-center group cursor-pointer">
+                <span class="text-2xl font-extrabold text-[#0F172A] tracking-tighter italic">
+                    VARSANA<span class="text-blue-600 group-hover:animate-bounce inline-block">.</span>
+                </span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-10">
+                <a href="#layanan" class="relative text-[11px] font-bold uppercase tracking-[0.25em] text-[#0F172A]/70 hover:text-blue-600 transition-all duration-300 group">
+                    Layanan
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-500 group-hover:w-full"></span>
+                </a>
+                <a href="#tentang" class="relative text-[11px] font-bold uppercase tracking-[0.25em] text-[#0F172A]/70 hover:text-blue-600 transition-all duration-300 group">
+                    Tentang
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-500 group-hover:w-full"></span>
+                </a>
+                <button class="bg-[#0F172A] hover:bg-blue-600 text-white px-8 py-3 rounded-full text-xs font-bold transition-all duration-500 shadow-xl hover:-translate-y-1">
+                    Konsultasi
+                </button>
+            </div>
+
+            <button class="md:hidden" id="menuBtn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-50/60 rounded-full blur-[100px] -z-10"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="max-w-2xl text-left z-10">
+                <div class="overflow-hidden mb-8">
+                    <div class="inline-flex items-center space-x-3 py-2 px-5 rounded-full bg-slate-50 border border-slate-200 text-slate-600 font-bold text-[10px] uppercase tracking-[0.3em] animate-reveal-bottom hover:bg-white hover:shadow-md transition-all">
+                        <i data-lucide="layers" class="w-3 h-3 text-blue-600"></i>
+                        <span>Strategic Business Partner</span>
+                    </div>
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl xl:text-8xl font-black text-[#0F172A] leading-[0.95] mb-10 tracking-tighter">
+                    <div class="overflow-hidden"><span class="block animate-reveal-bottom delay-100">Transformasi</span></div>
+                    <div class="overflow-hidden"><span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600 animate-reveal-bottom delay-200 pb-2">Bisnis Anda</span></div>
+                    <div class="overflow-hidden"><span class="block animate-reveal-bottom delay-300">Lewat Data.</span></div>
+                </h1>
+                
+                <p class="text-lg lg:text-xl text-slate-500 mb-12 max-w-lg leading-relaxed animate-fade-in delay-700 font-medium">
+                    Urus operasional UMKM jadi lebih profesional. Kami membantu Anda mengambil keputusan strategis berbasis <span class="text-[#0F172A] font-extrabold border-b-2 border-blue-200">fakta nyata</span> demi pertumbuhan berkelanjutan.
+                </p>
+                
+                <div class="flex animate-fade-in delay-900">
+                    <button class="bg-[#0F172A] hover:bg-blue-700 text-white px-12 py-5 rounded-full text-lg font-bold transition-all duration-500 flex items-center justify-center group shadow-2xl hover:shadow-blue-200 hover:-translate-y-2">
+                        Mulai Sekarang
+                        <i data-lucide="arrow-right" class="ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Parallax Visual -->
+            <div class="relative h-[650px] w-full flex items-center justify-center perspective-1000">
+                <div class="absolute w-64 h-64 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-full blur-2xl opacity-20 animate-pulse-slow" id="orb"></div>
+
+                <div class="relative z-20 bg-white/40 backdrop-blur-3xl p-8 rounded-[40px] shadow-2xl border border-white/60 w-full max-w-[380px] h-[420px] flex flex-col justify-between transition-transform duration-500 ease-out" id="glassPanel">
+                    <div class="flex justify-between items-start">
+                        <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-sm text-blue-600">
+                           <i data-lucide="trending-up"></i>
+                        </div>
+                        <div class="bg-white/50 px-4 py-1.5 rounded-full">
+                           <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Live Analysis</span>
+                        </div>
+                    </div>
+
+                    <div class="relative h-32 w-full">
+                        <svg viewBox="0 0 100 40" class="w-full h-full overflow-visible">
+                           <path d="M0 35 H100" stroke="#E2E8F0" stroke-width="0.5" stroke-dasharray="2 2" />
+                           <path d="M0 20 H100" stroke="#E2E8F0" stroke-width="0.5" stroke-dasharray="2 2" />
+                           <path d="M0 35 C 20 35, 30 25, 50 20 C 70 15, 80 5, 100 2" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" style="animation: draw-line 3s infinite alternate" />
+                        </svg>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="h-2 w-2/3 bg-slate-200/50 rounded-full"></div>
+                        <div class="h-2 w-1/2 bg-slate-200/50 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Satellites -->
+                <div class="absolute top-[15%] right-[5%] z-30 bg-white/90 backdrop-blur-xl p-4 rounded-3xl shadow-xl animate-float-slow border border-white/60 flex items-center gap-3" id="sat1">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                    <div><div class="h-1.5 w-12 bg-slate-200 rounded-full mb-1.5"></div><div class="h-1.5 w-8 bg-slate-200 rounded-full"></div></div>
+                </div>
+                <div class="absolute bottom-[20%] left-[-5%] z-30 bg-white/90 backdrop-blur-xl p-4 rounded-3xl shadow-xl animate-float-delayed border border-white/60 flex items-center gap-3" id="sat2">
+                    <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-600"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                    <div><div class="h-1.5 w-12 bg-slate-200 rounded-full mb-1.5"></div><div class="h-1.5 w-16 bg-slate-200 rounded-full"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="layanan" class="py-48 bg-[#F8FAFC]">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="reveal text-center max-w-3xl mx-auto mb-28">
+                <h2 class="text-5xl lg:text-6xl font-black text-[#0F172A] mb-8 leading-tight tracking-tighter italic">Solusi Taktis.</h2>
+                <p class="text-xl text-slate-500 leading-relaxed font-medium">Metodologi audit yang dirancang khusus untuk mempercepat pertumbuhan dan stabilitas finansial UMKM.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="servicesGrid">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="py-48 bg-white overflow-hidden">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-28 items-center">
+                <div class="reveal relative">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-50/50 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+                    <div class="relative z-10 bg-[#0F172A] rounded-[64px] p-16 lg:p-20 border border-slate-800 shadow-4xl overflow-hidden group text-white">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent"></div>
+                        <h2 class="text-5xl font-black mb-14 leading-tight relative">Partner <br><span class="text-blue-400 underline underline-offset-8">Objektif.</span></h2>
+                        <div class="space-y-10 relative">
+                            <div class="flex items-center space-x-6"><i data-lucide="check-circle-2" class="text-blue-600"></i><p class="text-slate-300 font-bold text-lg">Analisis kondisi usaha melalui data riil.</p></div>
+                            <div class="flex items-center space-x-6"><i data-lucide="check-circle-2" class="text-blue-600"></i><p class="text-slate-300 font-bold text-lg">Strategi realistis tanpa janji berlebihan.</p></div>
+                            <div class="flex items-center space-x-6"><i data-lucide="check-circle-2" class="text-blue-600"></i><p class="text-slate-300 font-bold text-lg">Keputusan rasional berbasis pasar.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="inline-block py-2 px-6 rounded-full bg-blue-50 text-blue-700 font-bold text-[10px] uppercase tracking-[0.3em] mb-10">Tentang Varsana</div>
+                    <p class="text-4xl lg:text-5xl font-black text-[#0F172A] mb-12 leading-[1.1] tracking-tighter">Kami membantu UMKM memahami realita bisnis mereka.</p>
+                    <div class="space-y-10 text-slate-500 font-medium leading-relaxed text-xl">
+                        <p>Varsana adalah partner konsultasi bisnis bagi pelaku UMKM yang ingin memahami kondisi usahanya secara lebih objektif.</p>
+                        <p>Kami membantu pemilik usaha melihat bisnis berdasarkan data dan dinamika pasar, sehingga keputusan yang diambil lebih rasional dan terukur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-24 border-t border-slate-100">
+        <div class="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <span class="text-3xl font-extrabold text-[#0F172A] tracking-tighter italic mb-10 md:mb-0">VARSANA<span class="text-blue-600">.</span></span>
+            <div class="flex space-x-12 mb-10 md:mb-0">
+                <a href="#" class="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 hover:text-blue-600 transition-all">Instagram</a>
+                <a href="#" class="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 hover:text-blue-600 transition-all">LinkedIn</a>
+            </div>
+            <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">© 2024 VARSANA CONSULTING. BEYOND DATA.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Configuration
+        const services = [
+            { title: "Analisis & Audit Usaha UMKM", desc: "Bedah tuntas kesehatan operasional dan sistem usaha Anda untuk menemukan titik kebocoran biaya.", icon: "search" },
+            { title: "Analisis Keuangan & Perbaikan HPP", desc: "Perbaikan struktur modal dan harga pokok penjualan agar margin keuntungan Anda jauh lebih sehat.", icon: "pie-chart" },
+            { title: "Pendampingan Keputusan Berbasis Data", desc: "Bimbingan langsung dalam mengambil langkah strategis menggunakan data riil, bukan sekadar asumsi.", icon: "bar-chart-3" },
+            { title: "Analisis Pasar & Posisi Usaha", desc: "Memahami posisi kompetitor dan karakter konsumen Anda untuk memenangkan persaingan di pasar.", icon: "target" },
+            { title: "Roadmap 30 Hari Pengembangan Usaha", desc: "Rencana aksi taktis selama satu bulan penuh untuk perbaikan performa bisnis secara instan dan terukur.", icon: "calendar-days" },
+            { title: "Strategi Digital Marketing UMKM", desc: "Arahan pemasaran digital yang praktis, hemat biaya, dan relevan dengan target pasar UMKM.", icon: "globe" }
+        ];
+
+        // Initialize Icons
+        function initIcons() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Populate Services
+        const grid = document.getElementById('servicesGrid');
+        if (grid) {
+            services.forEach(s => {
+                const div = document.createElement('div');
+                div.className = "reveal bg-white p-10 lg:p-14 rounded-[56px] border border-slate-100 hover:border-blue-400 transition-all duration-700 transform hover:-translate-y-5 group shadow-sm hover:shadow-2xl";
+                div.innerHTML = `
+                    <div class="w-16 h-16 bg-slate-50 text-blue-600 rounded-3xl flex items-center justify-center mb-10 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 transform group-hover:rotate-6">
+                      <i data-lucide="${s.icon}"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-[#0F172A] mb-6 leading-tight group-hover:text-blue-600 transition-colors">${s.title}</h3>
+                    <p class="text-slate-500 leading-relaxed font-medium text-base mb-10">${s.desc}</p>
+                    <div class="flex items-center text-blue-600 font-bold text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-500">
+                      Detail <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // Scroll Logic
+        window.addEventListener('scroll', () => {
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalScroll) * 100;
+            const progressBar = document.getElementById('scrollProgress');
+            if(progressBar) progressBar.style.width = progress + '%';
+
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/90', 'backdrop-blur-xl', 'border-b', 'border-slate-100', 'shadow-sm', 'py-3');
+                    navbar.classList.remove('bg-transparent', 'py-6');
+                } else {
+                    navbar.classList.remove('bg-white/90', 'backdrop-blur-xl', 'border-b', 'border-slate-100', 'shadow-sm', 'py-3');
+                    navbar.classList.add('bg-transparent', 'py-6');
+                }
+            }
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) el.classList.add('active');
+            });
+        });
+
+        // Mouse Interaction
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 50;
+            const moveY = (e.clientY - window.innerHeight / 2) / 50;
+
+            const orb = document.getElementById('orb');
+            const panel = document.getElementById('glassPanel');
+            const sat1 = document.getElementById('sat1');
+            const sat2 = document.getElementById('sat2');
+
+            if(orb) orb.style.transform = `translate(${moveX * -0.5}px, ${moveY * -0.5}px)`;
+            if(panel) panel.style.transform = `translate(${moveX}px, ${moveY}px) rotateY(${moveX / 5}deg) rotateX(${-moveY / 5}deg)`;
+            if(sat1) sat1.style.transform = `translate(${moveX * -1.5}px, ${moveY * -1.5}px)`;
+            if(sat2) sat2.style.transform = `translate(${moveX * 1.2}px, ${moveY * 1.2}px)`;
+        });
+
+        // Final Init
+        window.onload = () => {
+            initIcons();
+            window.dispatchEvent(new Event('scroll'));
+        };
+    </script>
+</body>
+</html>
